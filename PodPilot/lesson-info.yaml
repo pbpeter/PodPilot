@@ -1,0 +1,7 @@
+type: framework
+content:
+  - Environment setup
+  - Building the application image
+  - Configs and secrets
+  - Database resources
+  - Application deployment

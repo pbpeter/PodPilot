@@ -1,0 +1,58 @@
+hyperskill_project:
+  id: 556
+  ide_files: https://hyperskill.org/api/projects/556/additional-files/additional_files.json
+  is_template_based: false
+  use_ide: true
+  environment: unittest
+update_date: "Wed, 11 Nov 2026 08:59:21 UTC"
+stages:
+  - id: 3178
+    step: 53337
+    is_completed: false
+  - id: 3179
+    step: 53338
+    is_completed: false
+  - id: 3180
+    step: 53339
+    is_completed: false
+  - id: 3181
+    step: 53340
+    is_completed: false
+  - id: 3182
+    step: 53341
+    is_completed: true
+topics:
+  0:
+    - title: Operating systems
+      theory_id: 9704
+    - title: "Introduction to Docker, installation"
+      theory_id: 15850
+    - title: Orchestration tools
+      theory_id: 28777
+    - title: Introduction to Kubernetes
+      theory_id: 27049
+    - title: Components of Kubernetes
+      theory_id: 29167
+    - title: Tools for Kubernetes deployment
+      theory_id: 30688
+    - title: Introduction to Linux
+      theory_id: 9526
+    - title: Containers
+      theory_id: 15082
+  1:
+    - title: Docker build and Docker tag
+      theory_id: 23950
+  2:
+    - title: YAML
+      theory_id: 12722
+  3:
+    - title: Running replicated workloads on Kubernetes
+      theory_id: 53618
+    - title: Services
+      theory_id: 38518
+    - title: HTTP load balancing with Ingress
+      theory_id: 53681
+    - title: Ingress and egress network policies
+      theory_id: 39894
+    - title: Stateful workloads in Kubernetes
+      theory_id: 53666

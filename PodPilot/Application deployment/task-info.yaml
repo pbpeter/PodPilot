@@ -1,0 +1,108 @@
+type: edu
+files:
+  - name: task_manager/k8s/base/deployment.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/ingress.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/migrate-job.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/nginx-configmap.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/postgres-service.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/postgres-statefulset.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/base/service.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/secrets/django-secret.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/k8s/secrets/postgres-secret.yaml
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/__init__.py
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/asgi.py
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/production.py
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/settings.py
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/urls.py
+    visible: true
+    learner_created: false
+  - name: task_manager/task_manager/wsgi.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/migrations/0001_initial.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/migrations/__init__.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/__init__.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/admin.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/apps.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/models.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/serializers.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/tests.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/urls.py
+    visible: true
+    learner_created: false
+  - name: task_manager/tasks/views.py
+    visible: true
+    learner_created: false
+  - name: task_manager/.dockerignore
+    visible: true
+    learner_created: false
+  - name: task_manager/.gitignore
+    visible: true
+    learner_created: false
+  - name: task_manager/Dockerfile
+    visible: true
+    learner_created: false
+  - name: task_manager/manage.py
+    visible: true
+    learner_created: false
+  - name: task_manager/requirements.txt
+    visible: true
+    learner_created: false
+  - name: main.py
+    visible: true
+    learner_created: false
+  - name: test/__init__.py
+    learner_created: false
+  - name: test/tests.py
+    learner_created: false
+  - name: tests.py
+    learner_created: false
+feedback_link: https://hyperskill.org/projects/556/stages/3182/implement#comment
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Wed, 11 Nov 2026 17:47:17 UTC"
+record: -1

@@ -1,0 +1,154 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-manager
+  namespace: podpilot
+  labels:
+    app: task-manager
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-manager
+
+  template:
+    metadata:
+      labels:
+        app: task-manager
+
+    spec:
+      initContainers:
+        - name: collectstatic
+          image: task-manager:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "python", "manage.py", "collectstatic", "--noinput" ]
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: task_manager.production
+            - name: STATIC_ROOT
+              value: /app/staticfiles
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key
+                  key: secret-key
+          volumeMounts:
+            - name: static-files
+              mountPath: /app/staticfiles
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+              name: http
+          restartPolicy: Always
+          volumeMounts:
+            - name: static-files
+              mountPath: /usr/share/nginx/html/static
+              readOnly: true
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+
+
+      containers:
+      - name: task-manager
+        image: task-manager:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8000
+            name: django
+            protocol: TCP
+        env:
+          - name: DJANGO_SETTINGS_MODULE
+            value: task_manager.production
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: django-secret-key
+                key: secret-key
+          - name: ALLOWED_HOSTS
+            value: "*"
+          - name: DB_ENGINE
+            value: django.db.backends.postgresql
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secrets
+                key: database
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secrets
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secrets
+                key: password
+          - name: DB_HOST
+            value: postgres-service
+          - name: DB_PORT
+            value: "5432"
+          - name: STATIC_ROOT
+            value: /app/staticfiles
+
+        volumeMounts:
+          - name: static-files
+            mountPath: /app/staticfiles
+
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          timeoutSeconds: 5
+          failureThreshold: 12
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+      volumes:
+        - name: static-files
+          emptyDir: { }
+        - name: nginx-config
+          configMap:
+            name: task-manager-nginx-config

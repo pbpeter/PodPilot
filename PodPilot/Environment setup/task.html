@@ -1,0 +1,23 @@
+<div class="step-text">
+<h5 id="description">Description</h5><p>Kubernetes is the standard way of deploying scalable, production-ready applications. But before we deploy to a production-ready cluster, let's create a reliable local environment for testing. Since you'll be building the application image, you need to install Docker. Next, you need to run a local Kubernetes cluster using <a href="https://kind.sigs.k8s.io/docs/user/quick-start/" rel="noopener noreferrer nofollow" target="_blank">kind</a> or <a href="https://minikube.sigs.k8s.io/docs/start/" rel="noopener noreferrer nofollow" target="_blank">minikube</a>. If you have Docker Desktop installed, you can also run a single- or multi-node Kubernetes cluster with <code class="language-shell">kind</code> or <code class="language-shell">kubeadm</code> <a href="https://docs.docker.com/desktop/use-desktop/kubernetes/" rel="noopener noreferrer nofollow" target="_blank">directly from the interface</a>.</p><p>Once you install it, verify with:</p><pre><code class="language-shell">kubectl get nodes</code></pre><div class="alert alert-primary"><p>Ensure you have <a href="https://kubernetes.io/docs/tasks/tools/" rel="noopener noreferrer nofollow" target="_blank">kubectl</a> installed before running the above command.</p></div><p>Next, let's create a namespace, <code class="language-shell">podpilot</code>, where all our resources will live. You can do it with:</p><pre><code class="language-shell">kubectl create namespace podpilot
+
+# or 
+# kubectl create ns podpilot</code></pre><p>Finally, we need to set the proper context and default namespace. This is especially useful if you have more than one cluster running, and also to make sure resources end up in the right namespace. You can check your available contexts with:</p><pre><code class="language-shell">kubectl config get-contexts
+kubectl config current-context
+kubectl config view</code></pre><p>Use the following commands to set the context and namespace:</p><pre><code class="language-shell">kubectl config set-context &lt;context-name&gt; --namespace=podpilot</code></pre><h5 id="objectives">Objectives</h5><p>This is what you need to do here:</p><ul><li><p>Install and verify Docker.</p></li><li><p>Start a local Kubernetes cluster.</p></li><li><p>Configure <code class="language-shell">kubectl</code>.</p></li><li><p>Create a namespace, <code class="language-shell">podpilot</code>.</p></li><li><p>Set the proper context and namespace.</p></li></ul><h5 id="examples">Examples</h5><pre><code class="language-bash">kubectl get nodes
+
+# NAME                     STATUS   ROLES           AGE   VERSION
+# podpilot-control-plane   Ready    control-plane   2d8h    v1.34.0
+
+kubectl get namespace podpilot
+
+# NAME       STATUS   AGE
+# podpilot   Active   58d
+
+kubectl config get-contexts
+# CURRENT   NAME             CLUSTER          AUTHINFO         NAMESPACE
+#          docker-desktop   docker-desktop   docker-desktop
+#          kind-kind        kind-kind        kind-kind
+# *        kind-podpilot    kind-podpilot    kind-podpilot      podpilot
+#          minikube         minikube         minikube           default</code></pre>
+</div>

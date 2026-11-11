@@ -1,0 +1,21 @@
+type: hyperskill
+title: PodPilot
+language: English
+summary: "<p>Imagine you're tasked with deploying a containerized web application\
+  \ on Kubernetes for your team. You need to set up deployments and ensure smooth\
+  \ traffic routing between components. You also need to manage secrets, such as database\
+  \ credentials, securely while keeping configuration data separate from your application\
+  \ code. For the database, persistent storage is essential—after all, no one wants\
+  \ to lose data when a pod restarts. In this project, you'll do all of this. Along\
+  \ the way, you'll also become proficient with <code>kubectl</code>, developing the\
+  \ troubleshooting skills needed to manage workloads in a Kubernetes environment.</p>"
+programming_language: Python
+programming_language_version: 3.10
+environment: unittest
+content:
+  - PodPilot
+additional_files:
+  - name: requirements.txt
+    visible: true
+mode: Study
+yaml_version: 5

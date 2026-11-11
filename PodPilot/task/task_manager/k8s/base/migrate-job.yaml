@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrate
+  namespace: podpilot
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+        - name: migrate
+          image: task-manager:latest
+          command: ["python", "manage.py", "migrate", "--noinput"]
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: task_manager.production
+            - name: DB_HOST
+              value: postgres-service
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key
+                  key: secret-key
+            - name: ALLOWED_HOSTS
+              value: "*"
+            - name: DB_ENGINE
+              value: django.db.backends.postgresql
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: database
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: password
+            - name: DB_PORT
+              value: "5432"
+      restartPolicy: OnFailure
